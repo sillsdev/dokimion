@@ -79,6 +79,10 @@ System.out.flush();
                        .maxSize(10)
                        .maxWaitTime(30, TimeUnit.SECONDS));
 
+	settingsBuilder.applyToSocketSettings(builder -> builder
+			  .connectTimeout(10, TimeUnit.SECONDS)
+			  .readTimeout(15, TimeUnit.SECONDS));
+
         return MongoClients.create(settingsBuilder.build());
     }
 

@@ -97,7 +97,12 @@ System.out.println("setMongoDBProperties - dbname: " + dbname);
 				 builder.minSize(10)
 				 .maxSize(100)
 				 .maxWaitTime(8, TimeUnit.MINUTES)
+		)
+	        .applyToSocketSettings(builder ->
+				 builder.connectTimeout(10, TimeUnit.SECONDS)
+				 .readTimeout(15, TimeUnit.SECONDS)
 		);
+
          return MongoClients.create(settingsBuilder.build());
 
       } else {
@@ -117,6 +122,10 @@ System.out.println("setMongoDBProperties - dbname: " + dbname);
 				 builder.minSize(10)
 				 .maxSize(10)
 				 .maxWaitTime(30, TimeUnit.SECONDS)
+		)
+	        .applyToSocketSettings(builder ->
+				 builder.connectTimeout(10, TimeUnit.SECONDS)
+				 .readTimeout(15, TimeUnit.SECONDS)
 		);
          return MongoClients.create(settingsBuilder.build());
 
